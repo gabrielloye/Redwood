@@ -1,0 +1,77 @@
+<mat-sidenav-container class="sidenav-container">
+  <mat-sidenav #drawer class="left-sidenav" fixedInViewport="true"
+      [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
+      [mode]="(isHandset$ | async) ? 'over' : 'side'"
+      [opened]="!(isHandset$ | async) && leftSideOpen"
+      [ngStyle]="{'width': (isHandset$ | async)?'100%':'4%'}">
+    <mat-toolbar class="logo-container">
+      <fa-icon [icon]="faCompass" (click)="OpenLeftNav(); drawer.toggle()"></fa-icon>
+    </mat-toolbar>
+    <mat-nav-list>
+      <div routerLinkActive="active-link">
+        <a mat-list-item (click)="navigate('')"><fa-icon [icon]="faHome"></fa-icon></a>
+      </div>
+      <div routerLinkActive="active-link">
+        <a mat-list-item (click)="navigate('clients')" routerLinkActive="active-link"><fa-icon [icon]="faUsers"></fa-icon></a>
+      </div>
+      <div routerLinkActive="active-link">
+        <a mat-list-item routerLink="/main/portfolio" routerLinkActive="active-link"><fa-icon [icon]="faChartBar"></fa-icon></a>
+      </div>
+      <div routerLinkActive="active-link">
+        <a mat-list-item routerLink="/main/strategy"><fa-icon [icon]="faNewspaper"></fa-icon></a>
+      </div>
+      <div routerLinkActive="active-link">
+        <a mat-list-item routerLink="/main/alerts"><fa-icon [icon]="faCog"></fa-icon></a>
+      </div>
+      <!-- <div routerLinkActive="active-link">
+        <a mat-list-item routerLink="/main/ideas"><fa-icon size="2x" [icon]="['fas', 'lightbulb']"></fa-icon> Ideas</a>
+      </div> -->
+    </mat-nav-list>
+  </mat-sidenav>
+
+  <mat-sidenav class="right-sidenav" #rightSidenav opened="false" fixedInViewport="true" position="end"
+      [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
+      [mode]="(isHandset$ | async) ? 'over' : 'side'"
+      [opened]="!(isHandset$ | async) && rightSideOpen"
+      [ngStyle]="{'width': (isHandset$ | async)?'100%':'40%'}">
+    <app-right-column [sidenav]="rightSidenav"></app-right-column>
+  </mat-sidenav>
+
+  <mat-sidenav-content>
+    <mat-toolbar class="main-toolbar" [ngStyle]="{'width':leftSideOpen&&!(isHandset$|async)?'96%':'100%'}">
+      <div id="search-container">
+        <button
+          type="button"
+          aria-label="Toggle sidenav"
+          mat-icon-button
+          (click)="OpenLeftNav(); drawer.toggle()"
+          *ngIf="(isHandset$ | async) && !leftSideOpen">
+          <fa-icon [icon]="faCompass"></fa-icon>
+        </button>
+        <button
+          type="button"
+          mat-icon-button
+          aria-label="Toggle sidenav"
+          (click)="OpenLeftNav()"
+          *ngIf="!(isHandset$ | async) && !leftSideOpen"
+          id="leftNavToggle"
+          matTooltip="Expand/Collapse Menu"
+          matTooltipPosition="below">
+          <fa-icon [icon]="faCompass"></fa-icon>
+        </button>
+      </div>
+      
+      
+      <div class="side-buttons">
+        <fa-icon [icon]="faBars" (click)="openRightNav(); rightSidenav.toggle()"></fa-icon>
+      </div>
+    </mat-toolbar>
+
+   
+    
+    <div id="content-container">
+      <router-outlet></router-outlet>
+    </div>
+
+  </mat-sidenav-content>
+</mat-sidenav-container>

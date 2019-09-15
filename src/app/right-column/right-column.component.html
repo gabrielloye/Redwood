@@ -1,0 +1,91 @@
+<div class="overlay">
+  <ngb-tabset>
+    <ngb-tab title="Financial">
+      <ng-template ngbTabContent>
+        <div class="idea-container" *ngFor="let idea of ideas" >
+          <h5 (click)="expand(idea.id)">{{idea.name}}</h5>
+          <div *ngIf="!idea.expanded" class="details" [ngStyle]="{ color: idea.value>0 ? 'green' : idea.value<0 ? 'red' : 'black' }">
+            <span *ngIf="idea.returns>0"><fa-icon [icon]="faChevronUp"></fa-icon> + {{idea.returns}}% </span>
+            <span *ngIf="idea.returns<0"><fa-icon [icon]="faChevronDown"></fa-icon> + {{idea.returns}}% </span>
+            <span *ngIf="idea.value>0"> ${{idea.value}}M <fa-icon [icon]="faArrowUp"></fa-icon></span>
+            <span *ngIf="idea.value<0"> ${{idea.value}}M <fa-icon [icon]="faArrowDown"></fa-icon></span>
+          </div>
+          <div *ngIf="idea.expanded" class="ex-details">
+            <span>{{idea.company}}</span>
+            <h5>Relevant Clients</h5>
+            <div class="clients">
+              <div class="chart-container" [ngStyle]="{height: idea.id===0 ? '5vh' : idea.id===1 ? '12vh' : '9vh'}">
+                <ngx-charts-bar-horizontal-stacked
+                  [results]="idea.result"
+                  yAxis="true"
+                  [scheme]="idea.scheme"
+                  gradient="true"
+                  (select)="onSelect($event)">
+                  <ng-template #tooltipTemplate let-model="model">
+                    {{model.tooltipText}}
+                  </ng-template>
+                </ngx-charts-bar-horizontal-stacked>
+              </div>
+              <div class="client-options">
+                <span *ngFor="let result of idea.result">
+                  <div class="buttons-container">
+                    <div (click)="navigate()" id="button-1"><fa-icon [icon]="faEye"></fa-icon></div>
+                    <div (click)="remove(result)" [ngStyle]="{backgroundColor: idea.id>=1?'grey':'#4CAF50'}" id="button-2"><fa-icon [icon]="faCheck"></fa-icon></div>
+                    <div id="button-3" [ngStyle]="{backgroundColor: idea.id>=1?'grey':'#f44336'}"><fa-icon [icon]="faTimes"></fa-icon></div>
+                  </div>
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </ng-template>
+    </ngb-tab>
+    <ngb-tab title="Social">
+      <ng-template ngbTabContent>
+        <div class="social-container">
+          <mat-form-field appearance="legacy">
+            <mat-label><fa-icon [icon]="faSearch"></fa-icon> Search</mat-label>
+            <input matInput placeholder="Search">
+          </mat-form-field>
+          <div class="social-card">
+            <img src="https://previews.123rf.com/images/alphaspirit/alphaspirit1504/alphaspirit150400118/38665682-simple-young-man-face-smiling-and-optimistic.jpg">
+            <div>
+              <span>Anthony Green - 15 September 2019 10:49 +8 GMT</span>
+              <p>His daughter's favourite band, Coldplay is having a concert in Bangkok on the 13th of October - Notify him <fa-icon id="wechat" [icon]="faWhatsapp"></fa-icon></p>
+            </div>
+          </div>
+          <div class="social-card">
+            <img src="https://previews.123rf.com/images/alphaspirit/alphaspirit1504/alphaspirit150400118/38665682-simple-young-man-face-smiling-and-optimistic.jpg">
+            <div>
+              <span>Anthony Green - 15 September 2019 00:00 +8 GMT</span>
+              <p>Wife's birthday is happening in 5 days. Buy her favourite wine (Penfolds Grange 2005) - <a href="">Link to purchase site</a></p>
+            </div>
+          </div>
+          <div class="social-card">
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTKHkMzb_-TfuAHRDueZ5Q1niRmFAP3r4ci2gymJ-0atbxqljef">
+            <div>
+              <span>Jane Johnson - 14 September 2019 14:03 +8 GMT</span>
+              <p>Jane's daughter is having her wedding on the 2nd of October <br> - Add to calender <fa-icon id="calendar" [icon]="faCalendarAlt"></fa-icon>
+              <br> - Buy her a gift <fa-icon id="gift" [icon]="faGift"></fa-icon></p>
+            </div>
+          </div>
+          <div class="social-card">
+            <img src="https://image.shutterstock.com/image-photo/asian-man-260nw-66997342.jpg">
+            <div>
+              <span>Zhang YuFei - 14 September 2019 06:03 +8 GMT</span>
+              <p>Arrange a catch-up session with Zhang - Message him on WeChat  <fa-icon id="wechat" [icon]="faWeixin"></fa-icon></p>
+            </div>
+          </div>
+          <div class="social-card">
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTKHkMzb_-TfuAHRDueZ5Q1niRmFAP3r4ci2gymJ-0atbxqljef">
+            <div>
+              <span>Jane Johnson - 13 September 2019 22:00 +8 GMT</span>
+              <p>Jane is flying off to Maldives for a short holiday</p>
+            </div>
+          </div>
+        </div>
+      </ng-template>
+    </ngb-tab>
+    
+  </ngb-tabset>
+</div>

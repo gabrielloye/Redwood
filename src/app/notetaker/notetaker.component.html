@@ -1,0 +1,35 @@
+<perfect-scrollbar>
+<div class="overlay">
+  <h3>Anthony Green</h3>
+  <ngb-tabset>
+    <ngb-tab title="Voice">
+      <ng-template ngbTabContent>
+        <div id="container" (click)="start()">
+          <div id="dummy"></div>
+          <div class="voice-container">
+            <fa-icon [icon]="faMicrophone"></fa-icon>
+          </div>
+        </div>
+        <div class="response-container">
+          <p *ngIf="display">
+            Wife loves Thai cuisine.
+            <span class="highlight">Daughter</span> is going for a <span class="highlight">Coldplay Concert</span>
+          </p>
+          <button mat-raised-button color="primary" (click)="navigate()">Submit</button>
+        </div>
+      </ng-template>
+    </ngb-tab>
+    <ngb-tab title="Text">
+      <ng-template ngbTabContent>
+        <div class="container">
+          <mat-form-field appearance="outline">
+            <mat-label>Input</mat-label>
+            <input matInput [formControl]="input" placeholder="Type your text here">
+          </mat-form-field>
+          <button mat-raised-button color="primary" (click)="submit()">Submit</button>
+        </div>
+      </ng-template>
+    </ngb-tab>
+  </ngb-tabset>
+</div>
+</perfect-scrollbar>

@@ -1,0 +1,9 @@
+<div class="overlay">
+  <h3>Clients</h3>
+  <div class="menu-container">
+    <div class="client" *ngFor="let client of clients">
+      {{client.name}}
+      <button mat-raised-button color="primary" (click)="navigate()"><fa-icon [icon] ="faClipboard"></fa-icon></button>
+    </div>
+  </div>
+</div>

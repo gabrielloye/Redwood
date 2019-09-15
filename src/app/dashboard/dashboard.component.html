@@ -1,0 +1,99 @@
+<perfect-scrollbar>
+  <div class="overlay">
+    <h3>Total Assets Under Management: $750,000,000</h3>
+    <table mat-table matSort [dataSource]="dataSource">
+      <ng-container matColumnDef="name">
+        <th mat-header-cell mat-sort-header *matHeaderCellDef>Name</th>
+        <td mat-cell *matCellDef="let exposure">{{ exposure.name }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="value">
+        <th mat-header-cell mat-sort-header *matHeaderCellDef>Market Value</th>
+        <td mat-cell *matCellDef="let exposure">${{ exposure.value | number }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="performance">
+        <th mat-header-cell mat-sort-header *matHeaderCellDef>Performance to Date</th>
+        <td mat-cell *matCellDef="let exposure" >
+            {{ exposure.performance | number }} %
+        </td>
+      </ng-container>
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns" [ngClass]="{'highlight': selectedRowIndex == row.id}" (click)="highlightRow(row)"></tr>
+    </table>
+    <div *ngIf="selectedPerson">
+      <h3><strong>{{selectedPerson}}</strong></h3>
+      <h4>Asset Classification</h4>
+      <div class="asset-classes">
+        <div class="pie-container">
+          <ngx-charts-pie-chart
+            [results]="asset"
+            labels="true"
+            (select)="expand($event)"
+            trimLabels="false"
+            maxLabelLength = "20"
+            [labelFormatting]="setLabelFormatting">
+          </ngx-charts-pie-chart>
+        </div>
+        <div *ngIf="hidden" class="small-pie">
+          <ngx-charts-pie-chart
+            [results]="usEquity"
+            scheme="neons"
+            labels="true"
+            maxLabelLength="22"
+            [labelFormatting]="usFormatting">
+          </ngx-charts-pie-chart>
+        </div>
+      </div>
+      <div class="full">
+        <div class="half">
+          <h4>Asset by Country</h4>
+          <div class="country-container">
+            <ngx-charts-pie-chart
+              [results]="countryData"
+              scheme="forest"
+              labels="true"
+              maxLabelLength="20"
+              [labelFormatting]="countryFormatting">
+            </ngx-charts-pie-chart>
+          </div>
+        </div>
+        <div class="half">
+          <h4>Asset by Currency</h4>
+          <div class="country-container">
+            <ngx-charts-pie-chart
+              [results]="currencyData"
+              scheme="horizon"
+              labels="true"
+              maxLabelLength="20"
+              [labelFormatting]="currencyFormatting">
+            </ngx-charts-pie-chart>
+          </div>
+        </div>
+      </div>
+      
+    </div>
+    
+
+  </div>
+</perfect-scrollbar>
+
+
+    <!-- <div class="pie-container">
+      <ngx-charts-advanced-pie-chart
+        [view]="view"
+        scheme="cool"
+        [results]="single"
+        (select)="onSelect($event)">
+      </ngx-charts-advanced-pie-chart>
+    </div>
+    <div class="pie-container">
+      <ngx-charts-line-chart
+        [view]="view"
+        [scheme]="colorScheme"
+        [results]="data"
+        xAxis="true"
+        yAxis="true"
+        (select)="onSelect($event)">
+      </ngx-charts-line-chart>
+    </div> -->

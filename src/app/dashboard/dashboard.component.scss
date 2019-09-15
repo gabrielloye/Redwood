@@ -1,0 +1,43 @@
+.overlay {
+  margin: 3vh 2vw;
+  height: 100%;
+}
+table{
+  width: 100%;
+  margin: 1vh 0 3vh 0;
+}
+
+.asset-classes {
+  display: flex;
+  justify-content: center;
+}
+.pie-container {
+  width: 60%;
+  height: 40vh;
+}
+.small-pie {
+  width: 37%;
+  height: 40vh;
+}
+
+.highlight{
+  background: #fff383;
+}
+
+.country-container {
+  width: 100%;
+  height: 40vh;
+}
+h4 {
+  margin-top: 2vh;
+  text-decoration: underline;
+}
+.full {
+  width: 100%;
+  height: 45vh;
+  display: flex;
+}
+.half {
+  width: 45%;
+  height: 45vh;
+}

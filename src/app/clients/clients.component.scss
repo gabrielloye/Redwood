@@ -1,0 +1,15 @@
+.overlay {
+  padding: 3vh 3vw;
+  height: 70vh;
+}
+
+.menu-container {
+    background-color: white;
+    padding: 4vh 1vw 15vh 3vw;
+    min-height: 70vh;
+    .client {
+      margin: 3vh 0;
+      display: flex;
+      justify-content: space-between;
+    }
+}
